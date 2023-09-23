@@ -14,6 +14,7 @@ from constants import generals as const_general
 def save_playlist(folder: str, url: str):
     #!Agregar un verificador regex del folder destino
     download_folder = os.path.join(const_general.BASE_DIR, folder)
+    print(download_folder)
     playlist = Playlist(url)
     count = 1
     for video in playlist:
