@@ -4,10 +4,13 @@ from tkinter import filedialog
 from tkinter import messagebox
 
 from tools import youtube
+from tools.paths import media_root
 
 class HomeView:
     def __init__(self, root):
         self.root = root
+        self.root_entry = None
+        self.url_entry = None
         self.window()
 
     def window(self):
@@ -18,19 +21,16 @@ class HomeView:
         self.create_buttons(frm)
         
     def setup_windows(self):
-        self.root.title("Mi Descargador de YouTube")
-    
+        self.root.title("Yt Playlist Downloader #CodedByColin")
+        self.root.iconbitmap(media_root('ico/main.ico'))
+        
     def seleccionar_ruta(self):
         ruta_seleccionada = filedialog.askdirectory()  # Abre el diálogo de selección de directorio
-        self.root_entry.delete(0, tk.END)  # Borra cualquier texto existente en el Entry de ruta
-        self.root_entry.insert(0, ruta_seleccionada)  # Inserta la ruta seleccionada en el Entry de ruta
+        self.root_entry = ruta_seleccionada  # Inserta la ruta seleccionada en el Entry de ruta
 
     def create_entries(self, frame):
         ttk.Label(frame, text="Root:").grid(column=0, row=0, sticky=tk.W)
-        self.root_entry = ttk.Entry(frame, width=100)  
-        self.root_entry.grid(column=1, row=0)
-        
-        ttk.Button(frame, text="Seleccionar Ruta", command=self.seleccionar_ruta).grid(column=2, row=0)
+        ttk.Button(frame, text="Seleccionar Ruta", command=self.seleccionar_ruta).grid(column=1, row=0)
         
         ttk.Label(frame, text="URL:").grid(column=0, row=1, sticky=tk.W)
         self.url_entry = ttk.Entry(frame, width=100)
@@ -41,7 +41,7 @@ class HomeView:
         ttk.Button(frame, text="Quit", command=self.root.destroy).grid(columnspan=2, row=3)
 
     def send_data(self):
-        root_value = self.root_entry.get()
+        root_value = self.root_entry
         url_value = self.url_entry.get()
         if not root_value:
             messagebox.showwarning("Campos vacíos", "Ingrese una ruta para descargar la playlist.")
