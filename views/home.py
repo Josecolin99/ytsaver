@@ -22,7 +22,7 @@ class HomeView:
         
     def setup_windows(self):
         self.root.title("Yt Playlist Downloader #CodedByColin")
-        self.root.iconbitmap(media_root('ico/main.ico'))
+        self.root.iconbitmap(media_root('ico\main.ico'))
         
     def seleccionar_ruta(self):
         ruta_seleccionada = filedialog.askdirectory()  # Abre el diálogo de selección de directorio
